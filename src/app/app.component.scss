@@ -1,0 +1,23 @@
+.mat-mdc-table {
+    min-width: 100px !important;
+    background-color: white;
+    margin: 5px;
+}
+.mat-mdc-header-row {
+    height: auto;
+}
+.mat-mdc-row {
+    height: auto;
+}
+.mat-drawer {
+    background-color: white;
+    width: 100px;
+    border:  1px solid #555;
+}
+.mat-drawer-content {
+    padding: 12px;
+    display: flex;
+    // flex-direction: column;
+    // align-items: flex-start;
+    background-color: white;
+}
