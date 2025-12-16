@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { interval, Subscription } from 'rxjs';
 import { TextToSpeechService } from './text-to-speech.service';
@@ -38,20 +40,34 @@ function shuffle(array: number[]) {
 
 @Component({
     selector: 'app-root',
-    imports: [MatButtonModule, MatTableModule, MatSidenavModule,  MatDividerModule],
+    imports: [MatButtonModule, MatTooltipModule, MatTableModule, MatSidenavModule,  MatDividerModule, MatSliderModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
     title = 'angular-bingo';
     private intervalSubscription: Subscription | undefined;
-    secondsInterval = 3000; // 3 seconds in milliseconds
+    secondsInterval = 5000; // 3 seconds in milliseconds
 
     call = shuffle(Array.from({length: 75}, (_, i) => i + 1))
+    called: number[] = [
+        // Uncomment next line to already call "I"
+        // 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+        // Uncomment next line to already call "N"
+        // 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45,
+        // Uncomment next line to already call "G"
+        // 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+    ]
+    currentCall: string = ""
+    previousCall: string = ""
+    ballColor: string = "red"
 
     callIndex: number = -1
 
     constructor(private ttsService: TextToSpeechService) {
+        const calledSet = new Set(this.called);
+        this.call = this.call.filter(item => !calledSet.has(item));
+
         console.log("Randomized Call Order: ", this.call)
     }
 
@@ -73,10 +89,34 @@ export class AppComponent {
 
     callNumber(): void {
         this.callIndex += 1
-        this.sayRow("n " + this.call[this.callIndex])
+        if (this.callIndex <= this.call.length) {
+            this.previousCall = this.currentCall
+            let numberToCall = this.call[this.callIndex]
+            this.called.push(numberToCall)
+            let say = ""
+            if (numberToCall < 16) {
+                say = "b " + numberToCall
+            } else if (numberToCall < 31) {
+                say = "i " + numberToCall
+            } else if (numberToCall < 46) {
+                say = "n " + numberToCall
+            } else if (numberToCall < 61) {
+                say = "g " + numberToCall
+            } else {
+                say = "o " + numberToCall
+            }
+            this.currentCall = say.toUpperCase()
+            this.sayRow(say.replace("67", "6 7"))
+            if (this.callIndex % 2 == 0) {
+                this.ballColor = "red"
+            } else {
+                this.ballColor = "green"
+            }
+        }
     }
 
     sayRow(row:string): void {
+        row = row.replace("67", "6 7")
         console.log(row)
         this.ttsService.speak(row);
     }

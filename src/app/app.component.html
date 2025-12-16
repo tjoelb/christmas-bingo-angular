@@ -1,8 +1,23 @@
-<button matButton="elevated">Basic</button>
 <mat-drawer-container class="main">
     <mat-drawer mode="side" opened>
-        <button matButton="elevated" (click)="start()">Start</button>
-        <button matButton="elevated" (click)="stop()">Stop</button>
+        <div style="display: flex; flex-direction: column">
+            <button
+                style="margin: 10px"
+                matButton="elevated"
+                (click)="start()"
+                matTooltip="This starts the bingo caller!"
+            >
+                Start
+            </button>
+            <button
+                style="margin: 10px"
+                matButton="elevated"
+                (click)="stop()"
+                matTooltip="This stops the bingo caller!"
+            >
+                Stop
+            </button>
+        </div>
     </mat-drawer>
     <mat-drawer-content>
         <!-- B -->
@@ -14,9 +29,8 @@
                 mat-row
                 *matRowDef="let row; columns: bDisplayedColumns"
                 (click)="sayRow('B ' + row.b)"
-            >
-                <!-- [class.demo-row-is-clicked]="clickedRows.has(row)" -->
-            </tr>
+                [class.highlight-called]="called.includes(row.b)"
+            ></tr>
         </table>
         <mat-divider [vertical]="true"></mat-divider>
 
@@ -29,6 +43,7 @@
                 mat-row
                 *matRowDef="let row; columns: iDisplayedColumns"
                 (click)="sayRow('I ' + row.i)"
+                [class.highlight-called]="called.includes(row.i)"
             ></tr>
         </table>
         <mat-divider [vertical]="true"></mat-divider>
@@ -42,6 +57,7 @@
                 mat-row
                 *matRowDef="let row; columns: nDisplayedColumns"
                 (click)="sayRow('N ' + row.n)"
+                [class.highlight-called]="called.includes(row.n)"
             ></tr>
         </table>
         <mat-divider [vertical]="true"></mat-divider>
@@ -55,6 +71,7 @@
                 mat-row
                 *matRowDef="let row; columns: gDisplayedColumns"
                 (click)="sayRow('G ' + row.g)"
+                [class.highlight-called]="called.includes(row.g)"
             ></tr>
         </table>
         <mat-divider [vertical]="true"></mat-divider>
@@ -68,8 +85,33 @@
                 mat-row
                 *matRowDef="let row; columns: oDisplayedColumns"
                 (click)="sayRow('O ' + row.o)"
+                [class.highlight-called]="called.includes(row.o)"
             ></tr>
         </table>
         <mat-divider [vertical]="true"></mat-divider>
+
+        <div
+            style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: -webkit-fill-available;
+            "
+        >
+            <h1>Current number:</h1>
+            <div class="circle" [style.background-color]="ballColor">
+                <span
+                    ><h1 style="margin: 0px">
+                        {{ currentCall.split(" ")[0] }}
+                    </h1></span
+                >
+                <span
+                    ><h1 style="margin: 0px">
+                        {{ currentCall.split(" ")[1] }}
+                    </h1></span
+                >
+            </div>
+        </div>
+        <!-- <div>Previous number: {{ previousCall }}</div> -->
     </mat-drawer-content>
 </mat-drawer-container>

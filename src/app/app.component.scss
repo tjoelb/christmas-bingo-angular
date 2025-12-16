@@ -1,3 +1,6 @@
+.highlight-called {
+    background-color: red;
+}
 .mat-mdc-table {
     min-width: 100px !important;
     background-color: white;
@@ -20,4 +23,19 @@
     // flex-direction: column;
     // align-items: flex-start;
     background-color: white;
+}
+.mat-drawer-inner-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.circle {
+    height: 200px;
+    width: 200px;
+    // background-color: #ff0000; /* Adds a red fill to the circle */
+    border-radius: 50%; /* Makes the square element circular */
+    display: inline-block; /* Allows other elements to sit next to it */
+    text-align: center;
+    align-content: center;
+    font-size: 22px;
 }
