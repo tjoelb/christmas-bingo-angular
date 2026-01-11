@@ -1,5 +1,5 @@
 {
-  "name": "chirstmas-bingo-angular",
+  "name": "christmas-bingo-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:chirstmas-bingo-angular": "node dist/chirstmas-bingo-angular/server/server.mjs",
+    "serve:ssr:christmas-bingo-angular": "node dist/christmas-bingo-angular/server/server.mjs",
     "lint": "ng lint"
   },
   "private": true,

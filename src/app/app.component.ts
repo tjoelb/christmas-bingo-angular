@@ -54,7 +54,7 @@ function shuffle(array: number[]) {
 export class AppComponent {
     private ttsService = inject(TextToSpeechService);
 
-    title = 'chirstmas-bingo-angular';
+    title = 'christmas-bingo-angular';
     private intervalSubscription: Subscription | undefined;
     secondsInterval = 5;
 
