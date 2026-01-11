@@ -7,7 +7,7 @@ export class TextToSpeechService {
     // Check for browser support
     private synthesis = window.speechSynthesis;
 
-    speak(text: string, rate: number = 1): void {
+    speak(text: string, rate = 1): void {
         if (this.synthesis && 'speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US'; // Set language

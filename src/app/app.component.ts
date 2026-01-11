@@ -31,7 +31,7 @@ function shuffle(array: number[]) {
     while (currentIndex != 0) {
 
         // Pick a remaining element...
-        let randomIndex = Math.floor(Math.random() * currentIndex);
+        const randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
         // And swap it with the current element.
@@ -58,11 +58,11 @@ export class AppComponent {
 
     call = shuffle(Array.from({length: 75}, (_, i) => i + 1))
     called: number[] = []
-    currentCall: string = ""
-    previousCall: string = ""
-    ballColor: string = "red"
+    currentCall = ""
+    previousCall = ""
+    ballColor = "red"
 
-    callIndex: number = -1
+    callIndex = -1
 
     constructor(private ttsService: TextToSpeechService) {
         const calledSet = new Set(this.called);
@@ -110,7 +110,7 @@ export class AppComponent {
         this.callIndex += 1
         if (this.callIndex <= this.call.length) {
             this.previousCall = this.currentCall
-            let numberToCall = this.call[this.callIndex]
+            const numberToCall = this.call[this.callIndex]
             this.called.push(numberToCall)
             let say = ""
             if (numberToCall < 16) {
