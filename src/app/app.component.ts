@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -52,6 +52,8 @@ function shuffle(array: number[]) {
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
+    private ttsService = inject(TextToSpeechService);
+
     title = 'chirstmas-bingo-angular';
     private intervalSubscription: Subscription | undefined;
     secondsInterval = 5;
@@ -64,7 +66,7 @@ export class AppComponent {
 
     callIndex = -1
 
-    constructor(private ttsService: TextToSpeechService) {
+    constructor() {
         const calledSet = new Set(this.called);
         this.call = this.call.filter(item => !calledSet.has(item));
 
