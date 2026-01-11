@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    --mat-sys-background: #ffffff;
+    // Override primary color
+    --mat-sys-primary: #ffffff;
+    // Override surface/background color
+    --mat-sys-surface: #ffffff;
+    --mat-sys-surface-variant: #ffffff;
+    // Override text on primary
+    --mat-on-primary: #ffffff;
+
+}

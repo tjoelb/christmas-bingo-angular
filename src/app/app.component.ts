@@ -5,6 +5,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 import { interval, Subscription } from 'rxjs';
 import { TextToSpeechService } from './text-to-speech.service';
@@ -40,24 +43,21 @@ function shuffle(array: number[]) {
 
 @Component({
     selector: 'app-root',
-    imports: [MatButtonModule, MatTooltipModule, MatTableModule, MatSidenavModule,  MatDividerModule, MatSliderModule],
+    imports: [
+        MatButtonModule, MatTooltipModule, MatTableModule,
+        MatSidenavModule,  MatDividerModule, MatSliderModule,
+        MatInputModule, MatFormFieldModule, FormsModule
+    ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
-    title = 'angular-bingo';
+    title = 'chirstmas-bingo-angular';
     private intervalSubscription: Subscription | undefined;
-    secondsInterval = 5000; // 3 seconds in milliseconds
+    secondsInterval = 5;
 
     call = shuffle(Array.from({length: 75}, (_, i) => i + 1))
-    called: number[] = [
-        // Uncomment next line to already call "I"
-        // 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-        // Uncomment next line to already call "N"
-        // 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45,
-        // Uncomment next line to already call "G"
-        // 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
-    ]
+    called: number[] = []
     currentCall: string = ""
     previousCall: string = ""
     ballColor: string = "red"
@@ -71,10 +71,29 @@ export class AppComponent {
         console.log("Randomized Call Order: ", this.call)
     }
 
+    iMarkCalled(): void {
+        this.markCalled([16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
+    }
+
+    nMarkCalled(): void {
+        this.markCalled([31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]);
+    }
+    gMarkCalled(): void {
+        this.markCalled([46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]);
+    }
+
+    markCalled(list: number[]): void {
+        this.called = this.called.concat(list);
+        const calledSet = new Set(this.called);
+        this.call = this.call.filter(item => !calledSet.has(item));
+
+        console.log("NEW Randomized Call Order: ", this.call)
+    }
+
     start(): void {
         if (typeof this.intervalSubscription === 'undefined') {
             console.log("setting sub")
-            this.intervalSubscription = interval(this.secondsInterval).subscribe(() => {
+            this.intervalSubscription = interval(this.secondsInterval * 1000).subscribe(() => {
                 this.callNumber();
             });
         }
