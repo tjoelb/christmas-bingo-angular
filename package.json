@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
     "serve:ssr:christmas-bingo-angular": "node dist/christmas-bingo-angular/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "update-angular": "ng update @angular/cli @angular/core"
   },
   "private": true,
   "dependencies": {
