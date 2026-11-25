@@ -1,6 +1,6 @@
 # Christmas Bingo Angular
 
-Simple bingo webapp build for my family to use during our yearly Christmas bingo.
+Simple bingo webapp build for my family to use during our yearly Christmas bingo. Feel free to give it a try on [Github Pages](https://tjoelb.github.io/christmas-bingo-angular/) or build and host it yourself!
 
 ## Features
 
@@ -25,3 +25,10 @@ Run the following vs code tasks:
 1. `npm: lint`
 2. `Check spelling`
 3. `npm: build`
+
+## Screenshots
+
+## Angular 19
+
+![Angular 19](./screenshots/angular19.png)
+![Angular 19 calling screenshot](./screenshots/angular19_calling.png)
