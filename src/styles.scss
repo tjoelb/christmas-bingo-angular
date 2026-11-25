@@ -1,16 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100vh; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    background: #fffaf0;
+}
 
 :root {
-    --mat-sys-background: #ffffff;
-    // Override primary color
-    --mat-sys-primary: #ffffff;
-    // Override surface/background color
-    --mat-sys-surface: #ffffff;
-    --mat-sys-surface-variant: #ffffff;
-    // Override text on primary
-    --mat-on-primary: #ffffff;
+    --mat-sys-background: #fffaf0;
+    --mat-sys-primary: #12382a;
+    --mat-sys-surface: #fffaf0;
+    --mat-sys-surface-variant: #f7f1df;
+    --mat-sys-on-primary: #ffffff;
+    --mat-sys-on-surface: #24352b;
+}
 
+app-root .bingo-column .mat-mdc-header-cell {
+    color: #ffffff !important;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+}
+
+app-root .bingo-column .highlight-called .mat-mdc-cell {
+    color: #ffffff !important;
+}
+
+app-root .control-rail .mat-mdc-floating-label {
+    color: #fffaf0 !important;
+}
+
+app-root .control-rail .mat-mdc-form-field input {
+    color: #ffffff !important;
+}
+
+@media (max-width: 680px) {
+    app-root .bingo-column .mat-mdc-header-cell {
+        font-size: 20px;
+    }
 }

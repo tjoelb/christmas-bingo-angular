@@ -58,12 +58,13 @@ export class AppComponent {
     title = 'christmas-bingo-angular';
     private intervalSubscription: Subscription | undefined;
     secondsInterval = 5;
+    isCalling = false;
 
     call = shuffle(Array.from({length: 75}, (_, i) => i + 1))
     called: number[] = []
     currentCall = ""
-    previousCall = ""
-    ballColor = "red"
+    previousCalls: string[] = []
+    ballColor = "#a51d2d"
 
     callIndex = -1
 
@@ -86,7 +87,7 @@ export class AppComponent {
     }
 
     markCalled(list: number[]): void {
-        this.called = this.called.concat(list);
+        this.called = [...new Set([...this.called, ...list])];
         const calledSet = new Set(this.called);
         this.call = this.call.filter(item => !calledSet.has(item));
 
@@ -100,6 +101,7 @@ export class AppComponent {
                 this.callNumber();
             });
         }
+        this.isCalling = true;
     }
 
     stop(): void {
@@ -107,12 +109,15 @@ export class AppComponent {
             this.intervalSubscription.unsubscribe();
             this.intervalSubscription = undefined
         }
+        this.isCalling = false;
     }
 
     callNumber(): void {
         this.callIndex += 1
-        if (this.callIndex <= this.call.length) {
-            this.previousCall = this.currentCall
+        if (this.callIndex < this.call.length) {
+            if (this.currentCall) {
+                this.previousCalls = [this.currentCall, ...this.previousCalls].slice(0, 3);
+            }
             const numberToCall = this.call[this.callIndex]
             this.called.push(numberToCall)
             let say = ""
@@ -130,7 +135,7 @@ export class AppComponent {
             this.currentCall = say.toUpperCase()
             this.sayRow(say.replace("67", "6 7"))
             if (this.callIndex % 2 == 0) {
-                this.ballColor = "red"
+                this.ballColor = "#a51d2d"
             } else {
                 this.ballColor = "green"
             }

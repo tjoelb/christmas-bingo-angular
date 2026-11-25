@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:docs:angular22": "sh scripts/build-christmas-bingo22.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
     "serve:ssr:christmas-bingo-angular": "node dist/christmas-bingo-angular/server/server.mjs",

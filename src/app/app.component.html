@@ -1,144 +1,134 @@
 <mat-drawer-container class="main">
-    <mat-drawer mode="side" opened>
-        <div style="display: flex; flex-direction: column">
-            <button
-                style="margin: 10px; color: black"
-                matButton="elevated"
-                (click)="start()"
-                matTooltip="This starts the bingo caller!"
-            >
-                Start
-            </button>
-            <button
-                style="margin: 10px; color: black"
-                matButton="elevated"
-                (click)="stop()"
-                matTooltip="This stops the bingo caller!"
-            >
-                Stop
-            </button>
-            <mat-form-field>
-                <mat-label>Call Speed (s)</mat-label>
+    <mat-drawer mode="side" opened class="control-rail">
+        <div class="brand">
+            <span class="brand-mark" aria-hidden="true">★</span>
+            <div>
+                <span class="brand-kicker">Holiday</span>
+                <h1>Bingo</h1>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="call-actions">
+                <button
+                    matButton="elevated"
+                    class="start-button"
+                    (click)="start()"
+                    matTooltip="Start the bingo caller"
+                >
+                    Start
+                </button>
+                <button
+                    matButton="elevated"
+                    class="stop-button"
+                    (click)="stop()"
+                    matTooltip="Stop the bingo caller"
+                >
+                    Stop
+                </button>
+            </div>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Call speed (seconds)</mat-label>
                 <input
-                    mdInput
                     type="number"
                     matInput
                     [(ngModel)]="secondsInterval"
                     name="speed"
+                    min="1"
                 />
             </mat-form-field>
-            <button
-                style="margin: 10px; color: black"
-                matButton="elevated"
-                (click)="iMarkCalled()"
-                matTooltip="This marks all I numbers as called!"
-            >
-                Call I
-            </button>
-            <button
-                style="margin: 10px; color: black"
-                matButton="elevated"
-                (click)="nMarkCalled()"
-                matTooltip="This marks all N numbers as called!"
-            >
-                Call N
-            </button>
-            <button
-                style="margin: 10px; color: black"
-                matButton="elevated"
-                (click)="gMarkCalled()"
-                matTooltip="This marks all G numbers as called!"
-            >
-                Call G
-            </button>
-        </div>
-    </mat-drawer>
-    <mat-drawer-content>
-        <!-- B -->
-        <table mat-table [dataSource]="bDataSource" class="mat-elevation-z8">
-            <mat-text-column name="b"></mat-text-column>
 
-            <tr mat-header-row *matHeaderRowDef="bDisplayedColumns"></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: bDisplayedColumns"
-                (click)="sayRow('B ' + row.b)"
-                [class.highlight-called]="called.includes(row.b)"
-            ></tr>
-        </table>
-        <mat-divider [vertical]="true"></mat-divider>
-
-        <!-- I -->
-        <table mat-table [dataSource]="iDataSource" class="mat-elevation-z8">
-            <mat-text-column name="i"></mat-text-column>
-
-            <tr mat-header-row *matHeaderRowDef="iDisplayedColumns"></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: iDisplayedColumns"
-                (click)="sayRow('I ' + row.i)"
-                [class.highlight-called]="called.includes(row.i)"
-            ></tr>
-        </table>
-        <mat-divider [vertical]="true"></mat-divider>
-
-        <!-- N -->
-        <table mat-table [dataSource]="nDataSource" class="mat-elevation-z8">
-            <mat-text-column name="n"></mat-text-column>
-
-            <tr mat-header-row *matHeaderRowDef="nDisplayedColumns"></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: nDisplayedColumns"
-                (click)="sayRow('N ' + row.n)"
-                [class.highlight-called]="called.includes(row.n)"
-            ></tr>
-        </table>
-        <mat-divider [vertical]="true"></mat-divider>
-
-        <!-- G -->
-        <table mat-table [dataSource]="gDataSource" class="mat-elevation-z8">
-            <mat-text-column name="g"></mat-text-column>
-
-            <tr mat-header-row *matHeaderRowDef="gDisplayedColumns"></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: gDisplayedColumns"
-                (click)="sayRow('G ' + row.g)"
-                [class.highlight-called]="called.includes(row.g)"
-            ></tr>
-        </table>
-        <mat-divider [vertical]="true"></mat-divider>
-
-        <!-- O -->
-        <table mat-table [dataSource]="oDataSource" class="mat-elevation-z8">
-            <mat-text-column name="o"></mat-text-column>
-
-            <tr mat-header-row *matHeaderRowDef="oDisplayedColumns"></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: oDisplayedColumns"
-                (click)="sayRow('O ' + row.o)"
-                [class.highlight-called]="called.includes(row.o)"
-            ></tr>
-        </table>
-        <mat-divider [vertical]="true"></mat-divider>
-
-        <div style="display: flex; flex-direction: column; padding-left: 20px">
-            <h1>Current number:</h1>
-            <div class="circle" [style.background-color]="ballColor">
-                <span
-                    ><h1 style="margin: 0px">
-                        {{ currentCall.split(" ")[0] }}
-                    </h1></span
-                >
-                <span
-                    ><h1 style="margin: 0px">
-                        {{ currentCall.split(" ")[1] }}
-                    </h1></span
-                >
+            <div class="quick-calls" aria-label="Quick call controls">
+                <span>Quick call</span>
+                <button matButton="outlined" (click)="iMarkCalled()" matTooltip="Mark all I numbers called">I</button>
+                <button matButton="outlined" (click)="nMarkCalled()" matTooltip="Mark all N numbers called">N</button>
+                <button matButton="outlined" (click)="gMarkCalled()" matTooltip="Mark all G numbers called">G</button>
             </div>
         </div>
-        <!-- <div>Previous number: {{ previousCall }}</div> -->
+
+        <div class="call-progress">
+            <span>{{ called.length }}</span>
+            <small>numbers called</small>
+        </div>
+    </mat-drawer>
+
+    <mat-drawer-content class="game-area">
+        <header class="game-header">
+            <div>
+                <span class="eyebrow">The North Pole Bingo Hall</span>
+                <h2>Christmas Call Board</h2>
+            </div>
+            <span class="status" [class.is-calling]="isCalling" aria-live="polite">
+                <i></i>{{ isCalling ? 'Calling' : 'Ready to call' }}
+            </span>
+        </header>
+
+        <main class="game-layout">
+            <section class="number-board" aria-label="Bingo number board">
+                <table mat-table [dataSource]="bDataSource" class="bingo-column bingo-red">
+                    <mat-text-column name="b" justify="center"></mat-text-column>
+                    <tr mat-header-row *matHeaderRowDef="bDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: bDisplayedColumns"
+                        (click)="sayRow('B ' + row.b)"
+                        [class.highlight-called]="called.includes(row.b)"
+                    ></tr>
+                </table>
+
+                <table mat-table [dataSource]="iDataSource" class="bingo-column bingo-green">
+                    <mat-text-column name="i" justify="center"></mat-text-column>
+                    <tr mat-header-row *matHeaderRowDef="iDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: iDisplayedColumns"
+                        (click)="sayRow('I ' + row.i)"
+                        [class.highlight-called]="called.includes(row.i)"
+                    ></tr>
+                </table>
+
+                <table mat-table [dataSource]="nDataSource" class="bingo-column bingo-gold">
+                    <mat-text-column name="n" justify="center"></mat-text-column>
+                    <tr mat-header-row *matHeaderRowDef="nDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: nDisplayedColumns"
+                        (click)="sayRow('N ' + row.n)"
+                        [class.highlight-called]="called.includes(row.n)"
+                    ></tr>
+                </table>
+
+                <table mat-table [dataSource]="gDataSource" class="bingo-column bingo-green">
+                    <mat-text-column name="g" justify="center"></mat-text-column>
+                    <tr mat-header-row *matHeaderRowDef="gDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: gDisplayedColumns"
+                        (click)="sayRow('G ' + row.g)"
+                        [class.highlight-called]="called.includes(row.g)"
+                    ></tr>
+                </table>
+
+                <table mat-table [dataSource]="oDataSource" class="bingo-column bingo-red">
+                    <mat-text-column name="o" justify="center"></mat-text-column>
+                    <tr mat-header-row *matHeaderRowDef="oDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: oDisplayedColumns"
+                        (click)="sayRow('O ' + row.o)"
+                        [class.highlight-called]="called.includes(row.o)"
+                    ></tr>
+                </table>
+            </section>
+
+            <aside class="current-call-panel">
+                <span class="panel-label">Current number</span>
+                <div class="circle" [style.--ball-color]="ballColor">
+                    <span class="ball-letter">{{ currentCall.split(" ")[0] || "—" }}</span>
+                    <span class="ball-number">{{ currentCall.split(" ")[1] || "—" }}</span>
+                </div>
+                <div class="previous-calls">
+                    <span>Previous</span>
+                    <ol>
+                        @for (call of previousCalls; track call) {
+                            <li>{{ call }}</li>
+                        } @empty {
+                            <li>Waiting...</li>
+                        }
+                    </ol>
+                </div>
+            </aside>
+        </main>
     </mat-drawer-content>
 </mat-drawer-container>
