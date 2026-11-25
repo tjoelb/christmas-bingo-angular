@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#165b3b">
+    <title>Christmas Bingo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f7f4ec;
+        color: #173a2b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1rem;
+        background:
+          radial-gradient(ellipse at top, #e1efdf 0, transparent 55%),
+          #f7f4ec;
+      }
+
+      main {
+        width: min(100%, 42rem);
+        text-align: center;
+      }
+
+      .ornament {
+        margin: 0 0 0.75rem;
+        color: #bd3d37;
+        font-size: 2rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        letter-spacing: -0.04em;
+      }
+
+      .intro {
+        margin: 0.75rem 0 2.25rem;
+        color: #53675b;
+        font-size: 1.1rem;
+      }
+
+      .versions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+        gap: 1rem;
+        text-align: left;
+      }
+
+      .version {
+        display: block;
+        padding: 1.5rem;
+        border: 1px solid #d5dfd4;
+        border-radius: 1rem;
+        background: #fffefa;
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 0.5rem 1.5rem rgb(23 58 43 / 8%);
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .version:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2rem rgb(23 58 43 / 14%);
+      }
+
+      .version:focus-visible {
+        outline: 3px solid #bd3d37;
+        outline-offset: 4px;
+      }
+
+      .version h2 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+
+      .version p {
+        margin: 0.5rem 0 1.25rem;
+        color: #617267;
+      }
+
+      .open {
+        color: #165b3b;
+        font-weight: 700;
+      }
+
+      footer {
+        margin-top: 2rem;
+        color: #718076;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="ornament" aria-hidden="true">❄</p>
+      <h1>Christmas Bingo</h1>
+      <p class="intro">Choose which version you'd like to play.</p>
+      <nav class="versions" aria-label="Choose a Christmas Bingo version">
+        <a class="version" href="./christmas-bingo-angular19/browser/">
+          <h2>Christmas Bingo 19</h2>
+          <p>Play the Angular 19 version.</p>
+          <span class="open">Open version &rarr;</span>
+        </a>
+        <a class="version" href="./christmas-bingo-angular22/browser/">
+          <h2>Christmas Bingo 22</h2>
+          <p>Play the Angular 22 version.</p>
+          <span class="open">Open version &rarr;</span>
+        </a>
+      </nav>
+      <footer>Happy holidays and happy playing!</footer>
+    </main>
+  </body>
+</html>
